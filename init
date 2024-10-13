@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 cd infra
-aws ec2 create-key-pair --key-name aws-minecraft-key --query 'KeyMaterial' --output text > aws-minecraft-key.pem
+sudo npm uninstall -g aws-cdk
+sudo npm install -g aws-cdk
+npm install
+aws ec2 create-key-pair --key-name aws-minecraft-key --query 'KeyMaterial' --region us-west-2 --output text > aws-minecraft-key.pem
 chmod 400 aws-minecraft-key.pem
 cd infra && cdk deploy
 cd ../
