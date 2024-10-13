@@ -1,0 +1,5 @@
+# Ignore ssh keys
+*.pem
+
+# Ignore server files
+server/

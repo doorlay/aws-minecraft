@@ -1,24 +1,20 @@
 # AWS Minecraft
 This repository contains all the steps required to setup a Minecraft server on AWS.
 
-## Infrastructure
-1. Make a new Ubuntu EC2 instance.
-2. Configure an SSH inbound rule.
-3. Add an inbound rule within the Security Group, type "Custom ICMP rule - IPv4"
-Select "All" as the protocol, and 0.0.0.0/0 as source. This will make the server pingable.
-4. Add another inbound rule within the Security Group, type "Custom TCP", port range 25565, 0.0.0.0/0 as source. This will make the server reachable via Minecraft.
-6. Add an Elastic IP for the server so that the server does not change IPs each boot.
-
 ## Setup
-1. Run `./setup.sh` from the root folder of the server to set everything up.
-2. If you're planning on using a domain name for the server, set up an Alias record that points to the server's Elastic IP.
+1. Make sure you have the AWS CLI installed and have exported your AWS account information to your shell.  
+2. To perform initial setup of the server and all associated infrastructure, run `./init`.  
+3. Ensure your EC2 instance is running, then copy the permanent IP address assigned to your instance to all of the scripts in this repository.
+4. If you are using a pre-existing world, rename the world folder `server` and put it in the root directory of this project, then run `./upload`. This will take a couple of minutes.  
+5. Login to the EC2 instance by running `./login`. Run the setup script on the instance by running `./setup`.  
 
-## Running the Server
-The server should automatically launch when your EC2 instance is started. But for some reason that's not working right now, so instead run `./start` to start the server. When done, type `stop`.
+## Usage
+To login to the server, run `./login`.  
+Once logged in, you can start the server with `./start` and stop the server with `./stop`.  
+If you're planning on using a domain name for the server, set up an Alias record that points to the server's Elastic IP.
 
-## Logging in to Server
-1. Login via ssh: `ssh -i "ssh-key.pem" ubuntu@ec2-52-43-166-173.us-west-2.compute.amazonaws.com`
+<!-- 1. From within the server folder (which is not commited in this repo), run `tmux` to create a new session. Run `./start.sh` to start the server.
+2. Now type Ctrl+B then D to detach from this tmux head. You can now exit out of your EC2 instance without the server stopping. To reattach to the head, run `tmux attach -t 0`. -->
 
-## Future Work
-1. Discord bot with boto3 credentials to start and stop the EC2 instance.
-2. Switch all infrastructure from manual deployment to CDK.
+## Release
+Run `npx eslint .` to lint before commiting changes.

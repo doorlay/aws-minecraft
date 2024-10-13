@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cd infra
+aws ec2 create-key-pair --key-name aws-minecraft-key --query 'KeyMaterial' --output text > aws-minecraft-key.pem
+chmod 400 aws-minecraft-key.pem
+cd infra && cdk deploy
+cd ../
