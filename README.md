@@ -9,11 +9,11 @@ This repository contains IaC for an AWS hosted Minecraft server, mostly to codif
 ## Setup
 1. Run `./setup.sh`
 2. Ensure your EC2 instance is running, then copy the permanent IP address assigned to your instance to the `login.sh` and `upload.sh` scripts in this repository.
-3. If you are using a pre-existing world, rename the world folder `server` and put it in the root directory of this repository, then run `./upload`. This will take a couple of minutes.  
-6. Login to the EC2 instance by running `./login`. Run the setup script on the instance by running `./setup`. 
+3. If you are using a pre-existing world, rename the world folder `server` and put it in the root directory of this repository, then run `./upload.sh`. This will take a couple of minutes.  
+6. Login to the EC2 instance by running `./login.sh`. Run the setup script on the instance by running `./setup.sh`. 
 
 ## Usage
-To login to the server, run `./login`.  
+To login to the server, run `./login.sh`.  
 
 Once logged in, start the server with:
 ```
@@ -31,7 +31,7 @@ Ctrl + c
 If you're planning on using a domain name for the server, set up an Alias record that points to the server's Elastic IP.
 
 ## Troubleshooting
-If while running the `init` script you get a `Cloud assembly schema version mismatch` error, run:
+If while running the `setup.sh` script you get a `Cloud assembly schema version mismatch` error, run:
 ```
 sudo npm uninstall -g aws-cdk
 sudo npm install -g aws-cdk
@@ -41,5 +41,3 @@ If you cannot connect to your server while it's running, use an online port chec
 
 ## Release
 Run `npx eslint .` to lint before commiting changes.
-
-100.20.202.55
