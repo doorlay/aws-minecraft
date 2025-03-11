@@ -10,10 +10,10 @@ chmod +x stop
 
 # Upload the above scripts, as well as the server files, to the server
 sleep 1
-scp -i infra/aws-minecraft-key.pem setup ubuntu@100.20.202.55:setup
-scp -i infra/aws-minecraft-key.pem start ubuntu@100.20.202.55:start
-scp -i infra/aws-minecraft-key.pem stop ubuntu@100.20.202.55:stop
-scp -i infra/aws-minecraft-key.pem -r server ubuntu@100.20.202.55:server
+scp -i infra/aws-minecraft-key.pem setup ubuntu@[your ip here]:setup
+scp -i infra/aws-minecraft-key.pem start ubuntu@[your ip here]:start
+scp -i infra/aws-minecraft-key.pem stop ubuntu@[your ip here]:stop
+scp -i infra/aws-minecraft-key.pem -r server ubuntu@[your ip here]:server
 
 # Delete the scripts from the local host
 rm setup

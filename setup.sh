@@ -8,3 +8,5 @@ aws ec2 create-key-pair --key-name aws-minecraft-key --query 'KeyMaterial' --reg
 chmod 400 aws-minecraft-key.pem
 cd infra && cdk deploy
 cd ../
+printf '#!/usr/bin/env bash\n\nssh -i infra/aws-minecraft-key.pem ubuntu@[your ip here]' > login.sh
+chmod +x login.sh

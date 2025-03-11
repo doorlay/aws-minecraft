@@ -3,3 +3,7 @@
 
 # Ignore server files
 server/
+
+# Ignore scripts
+login.sh 
+upload.sh

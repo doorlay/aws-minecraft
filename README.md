@@ -1,22 +1,16 @@
 # AWS Minecraft
-This repository contains all the steps required to setup a Minecraft server on AWS, alongside an optional Discord bot to check server status and start / stop the server.
+This repository contains IaC for an AWS hosted Minecraft server, mostly to codify this knowledge into one location since I go through the same steps each time. There are some additional instructions on uploading world files and starting & stopping the server, all of which assume you're using [PaperMC](https://papermc.io/); if you're using a different server library, feel free to skip those lines in the setup. 
 
-## AWS Setup
-1. Make sure you have the AWS CLI installed and have exported your AWS account information to your shell.  
-2. If you would like to add the optional Discord infrasturcture, change line 10 within the `infra/bin/infra.ts` file to `"TRUE"`.
-3. To perform initial setup of the server and all associated infrastructure, run `./init`.  
-4. Ensure your EC2 instance is running, then copy the permanent IP address assigned to your instance to all of the scripts in this repository.
-5. If you are using a pre-existing world, rename the world folder `server` and put it in the root directory of this project, then run `./upload`. This will take a couple of minutes.  
-6. Login to the EC2 instance by running `./login`. Run the setup script on the instance by running `./setup`.  
+## Prerequisites 
+1. Ensure you have the [AWS CLI](https://aws.amazon.com/cli/) installed.
+2. Export your AWS account information to your shell as outlined [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html#envvars-set).
+3. Decide which size EC2 instance you want to run. Once decided, update line 25 in `infra/lib/infra-stack.ts`.
 
-## [Optional] Discord Setup
-1. Navigate to the [Discord Applications](https://discord.com/developers/applications) page and create a new application.
-2. Click "Activities -> Getting Started" on the left side of the page. Click "Enable".
-3. Follow Discord's instructions [here](https://discord.com/developers/docs/quick-start/getting-started#fetching-your-credentials) for populating the .env file in the `discord` folder in this repo.
-4. Click "Installation" on the left side of the page and add the "bot" scope under "Guild Install", along with the "Send Messages" permission.
-5. Click "General Information" on the life side of the page and scroll down to "Interactions Endpoint URL". Add your API Gateway endpoint URL, which can be found in the AWS console.
-6. Follow Discord's instructions [here](https://discord.com/oauth2/authorize?client_id=1295104349139374141) for installing the bot to your server.
-7. Follow Discord's instructions [here](https://discord.com/oauth2/authorize?client_id=1295104349139374141) for installing the bot to your user account.
+## Setup
+1. Run `./setup.sh`
+2. Ensure your EC2 instance is running, then copy the permanent IP address assigned to your instance to the `login.sh` and `upload.sh` scripts in this repository.
+3. If you are using a pre-existing world, rename the world folder `server` and put it in the root directory of this repository, then run `./upload`. This will take a couple of minutes.  
+6. Login to the EC2 instance by running `./login`. Run the setup script on the instance by running `./setup`. 
 
 ## Usage
 To login to the server, run `./login`.  
@@ -36,10 +30,6 @@ Ctrl + c
 
 If you're planning on using a domain name for the server, set up an Alias record that points to the server's Elastic IP.
 
-<!-- 1. From within the server folder (which is not commited in this repo), run `tmux` to create a new session. Run `./start.sh` to start the server.
-2. Now type Ctrl+B then D to detach from this tmux head. You can now exit out of your EC2 instance without the server stopping. To reattach to the head, run `tmux attach -t 0`. -->
-
-
 ## Troubleshooting
 If while running the `init` script you get a `Cloud assembly schema version mismatch` error, run:
 ```
@@ -51,3 +41,5 @@ If you cannot connect to your server while it's running, use an online port chec
 
 ## Release
 Run `npx eslint .` to lint before commiting changes.
+
+100.20.202.55
